@@ -16,6 +16,7 @@ import java.util.concurrent.Future;
 
 public class ThreadCallablePool {
 
+    /** 日志 */
     private static final Logger logger = LoggerFactory.getLogger(ThreadCallablePool.class);
 
     @Qualifier("taskExecutor")
