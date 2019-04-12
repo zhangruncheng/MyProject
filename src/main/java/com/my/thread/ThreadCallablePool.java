@@ -1,4 +1,4 @@
-package com.forezp.thread;
+package com.my.thread;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,6 @@ public class ThreadCallablePool {
     @Qualifier("taskExecutor")
     @Autowired
     private ThreadPoolTaskExecutor poolTaskExecutor;
-
 
     /**
      * 单个任务分多个线程去做，每个线程做对应线程的模块
