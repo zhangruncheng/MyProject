@@ -15,7 +15,6 @@ public class ThreadCountDownLatchPool {
 
     private static final Logger logger = LoggerFactory.getLogger(ThreadCountDownLatchPool.class);
 
-    @Qualifier("taskExecutor")
     @Autowired
     private ThreadPoolTaskExecutor poolTaskExecutor;
 

@@ -2,7 +2,94 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.my.dao.BaseDao" >
 
-    <select id="get" resultType="java.lang.Integer">
+
+
+    <select id="getList" parameterType="java.util.List" >
+
 
     </select>
+
+<!-- todo   如果伪表查询用 m.* 会报 为明确定义列错误-->
+    <insert id="addListBySequrence" parameterType="java.util.List">
+        <selectKey resultType="long" keyProperty="id" order="BEFORE">
+            select seq_sequrence.nexval from dual
+        </selectKey>
+        insert into table_name (
+        id,
+        column ,
+        column,
+        column,
+        column)
+        select seq_sequrence.nexval,
+        m.column1,
+        m.column2,
+        m.column3,
+        m.column4 from (
+        <foreach collection="list" index="index" item="item" separator="union all">
+            select
+                #{item.filed1} colunm1,
+                #{item.filed2} colunm2,
+                #{item.filed3} colunm3,
+                #{item.filed4} colunm4
+            from dual
+        </foreach>
+        ) m
+
+    </insert>
+
+<!--    todo on 条件中存在null 判定为false -->
+<!--    update 后面可以接更新不更新定条件-->
+    <insert id="updateOrIAdd" parameterType="java.util.List">
+        merge into table_name t
+        using (
+            <foreach collection="list" item="item" index="index" separator="union">(
+                select
+                #{item.filed1} filed1,
+                #{item.filed2} filed2,
+                #{item.filed3} filed3
+                from dual
+                )
+            </foreach> ) t1
+            on (t.column1 = t1.filed1 and t.column2 = t2.filed2)
+            when matched then
+            update set t.column1 = t1.column1,
+                       t.column2 = t1.column2
+               -- where
+            when not matched then
+
+            insert (colunm1,column2,column3,column4 )
+            values (t1.filed1,t1.filed2,t1.filed3,t1.filed4)
+
+    </insert>
+
+    <select id="getBeanByMap" parameterType="java.util.Map">
+        select * from table_name where t.coulum = #{key} and t.colunm in
+        <foreach collection="keyList" open="(" close=")" separator="," item=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="getBean" resultMap="">
+        select * from table_name  t
+        where t.column1 = #{bean.filed1}
+        and t.id in
+        <foreach collection="list" open="(" close=")" separator="," item=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <resultMap id="resMap" extends="defaultMap" type="">
+        <id column="" property=""/>
+        <collection property="filedList" ofType="Class.address">
+            <result column="" property="" />
+        </collection>
+        <association property="class" javaType="Class">
+            <result column="" property="" />
+        </association>
+    </resultMap>
+
+    <select id="getBeanList" parameterType="java.util.Map" resultMap="resMap">
+
+    </select>
+
 </mapper>
