@@ -2,11 +2,10 @@ package com.my.thread;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +20,7 @@ public class ThreadCallablePool {
     /** 日志 */
     private static final Logger logger = LoggerFactory.getLogger(ThreadCallablePool.class);
 
-    @Autowired
+    @Resource
     private ThreadPoolTaskExecutor poolTaskExecutor;
 
 
