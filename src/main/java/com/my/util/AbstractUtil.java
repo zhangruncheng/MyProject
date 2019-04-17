@@ -27,15 +27,15 @@ public abstract class AbstractUtil {
         int size = list.size() / pageSize;
         int count = list.size() % pageSize;
 
-        for (int i = 0; i <= pageSize ; i++) {
+        for (int i = 0; i <= size ; i++) {
             List<T> newObjList = new ArrayList<>();
             if( size == i) {
                 for (int j = i * pageSize; j < i * pageSize + count; j++) {
-                    newObjList.add(list.get(i));
+                    newObjList.add(list.get(j));
                 }
             } else {
                 for (int j = i * pageSize; j < (i + 1) * pageSize; j++) {
-                    newObjList.add(list.get(i));
+                    newObjList.add(list.get(j));
                 }
             }
             if (newObjList.size() > 0) {
