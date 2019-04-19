@@ -3,10 +3,6 @@ package com.my.comment;
 import com.my.annotation.CheckNull;
 import com.my.annotation.NotNull;
 import com.my.bean.Info;
-import org.apache.ibatis.javassist.*;
-import org.apache.ibatis.javassist.bytecode.CodeAttribute;
-import org.apache.ibatis.javassist.bytecode.LocalVariableAttribute;
-import org.apache.ibatis.javassist.bytecode.MethodInfo;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
@@ -17,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.lang.reflect.Parameter;
 import java.util.Arrays;
 import java.util.Objects;
@@ -130,37 +125,6 @@ public class CheckNullAspect {
         }
         // 5、校验通过
         return true;
-    }
-
-
-
-    /**
-     * 得到方法参数名称
-     * @Author : zhangruncheng
-     * @Date : 2019-04-16 20:02
-     * @param cls
-     * @param clazzName
-     * @param mehtodName
-     * @return java.lang.String[]
-    **/
-    private String [] getFieldsName(Class cls, String clazzName,String mehtodName) throws NotFoundException {
-        ClassPool pool = ClassPool.getDefault();
-        ClassClassPath classPath = new ClassClassPath(cls);
-        pool.insertClassPath(classPath);
-
-        CtClass cc = pool.get(clazzName);
-        CtMethod cm = cc.getDeclaredMethod(mehtodName);
-        MethodInfo methodInfo = cm.getMethodInfo();
-        CodeAttribute codeAttribute = methodInfo.getCodeAttribute();
-        LocalVariableAttribute attribute = (LocalVariableAttribute) codeAttribute.getAttribute(LocalVariableAttribute.tag);
-        String [] paramNames = new String[cm.getParameterTypes().length];
-        int pos = Modifier.isStatic(cm.getModifiers()) ? 0 : 1;
-
-        for (int i = 0, length = paramNames.length; i < length; i++) {
-            /** paramNames 即参数名 */
-            paramNames[i] = attribute.variableName(i + pos);
-        }
-        return paramNames;
     }
 
 }

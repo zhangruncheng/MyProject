@@ -24,4 +24,9 @@ public class BaseServiceImpl implements BaseService {
 
         return null;
     }
+
+    @Override
+    public List getList() {
+        return new ArrayList();
+    }
 }

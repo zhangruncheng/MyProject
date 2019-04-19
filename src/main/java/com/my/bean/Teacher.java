@@ -1,15 +1,12 @@
 package com.my.bean;
 
-import com.my.annotation.NotNull;
 import lombok.Data;
 
 @Data
-public class Teacher {
+public class Teacher extends Person{
 
-    @NotNull(groups = "")
     private String subject;
 
-    @NotNull(groups = "name")
     private String className;
 
 

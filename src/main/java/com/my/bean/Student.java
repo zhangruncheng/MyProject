@@ -1,21 +1,12 @@
 package com.my.bean;
 
-import com.my.annotation.Validate;
 import lombok.Data;
 
 @Data
-public class Student {
+public class Student extends Person{
 
-    @Validate(isNotNull = true)
-    private String name;
+    private String ClassName;
 
-    @Validate(isNotNull = true)
-    private String sex;
+    private String SchoolName;
 
-    @Validate(min = 1,max = 100)
-
-    private Integer age;
-
-    @Validate(isNotNull = true)
-    private String hight;
 }

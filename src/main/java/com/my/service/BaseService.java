@@ -14,4 +14,6 @@ public interface BaseService {
 
     List get(@CheckNull(group = "test") Teacher teacher);
 
+    List getList();
+
 }
