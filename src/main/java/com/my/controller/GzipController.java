@@ -29,7 +29,6 @@ public class GzipController {
 
     private static final Logger logger = LoggerFactory.getLogger(GzipController.class);
 
-
     @GetMapping("/getZip")
     public void get(HttpServletResponse response){
 
