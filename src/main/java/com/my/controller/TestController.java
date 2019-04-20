@@ -33,7 +33,6 @@ public class TestController {
     private ThreadCallablePool threadCallablePool;
 
 
-
     @Autowired
     private BaseService baseService;
 
@@ -61,6 +60,13 @@ public class TestController {
 
     }
 
+    /**
+     * json 字符校验
+     * @Author : zhangruncheng
+     * @Date : 2019-04-19 21:34
+     * @param student
+     * @return com.my.bean.ResponseVO
+    **/
     @PostMapping(value = "/postJson")
     public ResponseVO validatedJson(@RequestBody Student student){
 
