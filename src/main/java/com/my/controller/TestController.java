@@ -6,6 +6,7 @@ import com.my.bean.Student;
 import com.my.bean.Teacher;
 import com.my.bean.check.CheckStudent;
 import com.my.exception.BizException;
+import com.my.jdk8.GroupBy;
 import com.my.service.BaseService;
 import com.my.thread.ThreadCallablePool;
 import com.my.thread.ThreadTest;
@@ -39,9 +40,13 @@ public class TestController {
     @Resource
     private ThreadTest threadTest;
 
+    @Resource
+    private GroupBy groupBy;
+
     @GetMapping(value = "/get")
     public String get(){
-        threadCallablePool.getT();
+//        threadCallablePool.getT();
+        groupBy.testSum();
         return "hello word";
     }
 
@@ -82,5 +87,7 @@ public class TestController {
         }
         return vo;
     }
+
+
 
 }
