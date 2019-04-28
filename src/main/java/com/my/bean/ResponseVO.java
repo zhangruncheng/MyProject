@@ -3,7 +3,6 @@ package com.my.bean;
 import lombok.Data;
 
 import java.util.LinkedHashMap;
-import java.util.Objects;
 
 /**
  * @Author : zhangruncheng
@@ -46,7 +45,7 @@ public class ResponseVO extends LinkedHashMap<String,Object> {
         return (String)this.get("message");
     }
 
-    public ResponseVO setData(Objects data){
+    public ResponseVO setData(Object data){
         this.put("data",data);
         return this;
     }

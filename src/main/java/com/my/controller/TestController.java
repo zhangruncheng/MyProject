@@ -1,10 +1,13 @@
 package com.my.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.ValueFilter;
 import com.my.bean.Person;
 import com.my.bean.ResponseVO;
 import com.my.bean.Student;
 import com.my.bean.Teacher;
 import com.my.bean.check.CheckStudent;
+import com.my.common.GetClass;
 import com.my.exception.BizException;
 import com.my.jdk8.GroupBy;
 import com.my.service.BaseService;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class TestController {
@@ -72,12 +76,19 @@ public class TestController {
      * @param student
      * @return com.my.bean.ResponseVO
     **/
-    @PostMapping(value = "/postJson")
-    public ResponseVO validatedJson(@RequestBody Student student){
+    @PostMapping(value = "/postJson",produces = {"application/json;charset=UTF-8"})
+    public String validatedJson(@RequestBody Student student){
 
         ResponseVO vo = new ResponseVO();
+        StringBuilder sb = new StringBuilder();
         try {
             ValidateUtil.validate(student,  Privacy.class);
+            String s = JSON.toJSONString(student, valueFilter);
+            vo.setData("str");
+            String s1 = JSON.toJSONString(vo);
+            String replace = s1.replace("\"str\"", s);
+            sb.append(replace);
+
         } catch (BizException e ){
             vo.setMessage(e.getMessage());
             vo.setCode(e.getCode());
@@ -85,9 +96,23 @@ public class TestController {
         catch (Exception e) {
             e.printStackTrace();
         }
-        return vo;
+        return sb.toString();
     }
 
 
+    ValueFilter valueFilter = new ValueFilter() {
+        Map<String,String> filedMap = null;
+        @Override
+        public Object process(Object object, String name, Object value) {
+            if (null == filedMap) {
+                filedMap = GetClass.getFiledMap(object.getClass());
+            }
+            if ("java.lang.String".equalsIgnoreCase(filedMap.get(name)) && null == value) {
+                return "-";
+            }
+
+            return value;
+        }
+    };
 
 }

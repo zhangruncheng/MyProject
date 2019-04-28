@@ -3,13 +3,13 @@ package com.my.thread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ThreadCountDownLatchPool {
 
@@ -25,6 +25,8 @@ public class ThreadCountDownLatchPool {
         CountDownLatch countDownLatch = new CountDownLatch(list.size());
         /** map数组 */
         Map<String,Map> [] resultList = new Map[list.size()];
+
+        AtomicInteger atomicInteger = new AtomicInteger();
 
         for (int i = 0; i < list.size(); i++) {
             poolTaskExecutor.execute(getSingleDate(list.get(i),countDownLatch,resultList,i));
@@ -52,6 +54,8 @@ public class ThreadCountDownLatchPool {
                 try {
                     /** 获取该任务数据 */
                     indexData = getIndexData();
+                    int j = 6;
+                    int i = 10 / j;
                 }catch (Throwable e) {
 
                 } finally {
