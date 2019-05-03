@@ -24,6 +24,16 @@ public class JsonFiledTest {
     private static final Logger logger = LoggerFactory.getLogger(JsonFiledTest.class);
 
     public static void main(String[] args) {
+
+        Set set = new HashSet();
+        Student student1 = new Student();
+        student1.setName("3");
+        Student student2 = new Student();
+        student2.setName("3");
+        set.add(student1);
+        set.add(student2);
+
+
         Effective effective = new Effective(334523452.999,1000.076);
         Student student = new Student();
         Map<String,String> map = new HashMap<>();

@@ -40,15 +40,19 @@ public class ThreadTest {
         logger.info("threadSynchronization --> start list size is [{}]", groupArrayList.size());
         Integer integer = new Integer(0);
         for (List<Integer> integers : groupArrayList) {
+            integer++;
             /** 同步zuse */
+            Integer finalInteger = integer;
             threadPool.execute(new Runnable() {
                 @Override
                 public void run() {
                     try {
                         int i = 6;
+                        if (finalInteger ==3){
+                            i = 0;
+                        }
                         double j = 10 / i;
                         logger.info("threadSynchronization：run --> 计算结果 = [{}]", j);
-                        ;
                         Thread.sleep(500);
                         logger.info("threadSynchronization：run --> first start is [{}}  and List size is [{}]", integers.get(0), integers.size());
                     } catch (Exception e) {

@@ -19,7 +19,7 @@ public abstract class AbstractUtil {
      * @param pageSize
      * @return java.util.List<java.util.List<T>>
     **/
-    public static  <T> List<List<T>> getGroupArrayList(List<T> list, final int pageSize) {
+    public static <T> List<List<T>> getGroupArrayList(List<T> list, final int pageSize) {
         if (pageSize < 0 || pageSize > pageSize) {
             throw new IllegalArgumentException("pageSize 不能超过 " + pageSize);
         }
@@ -44,4 +44,10 @@ public abstract class AbstractUtil {
         }
         return objList;
     }
+
+
+
+
+
+
 }
