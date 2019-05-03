@@ -78,6 +78,7 @@ public class IndexUncheckedList<E> implements List<E>, Serializable {
         return list.iterator();
     }
 
+
     /**
      * Returns an array containing all of the elements in this list in proper
      * sequence (from first to last element).
