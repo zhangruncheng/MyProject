@@ -1,9 +1,14 @@
 package com.my.dao;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.mybatis.spring.annotation.MapperScan;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 public interface BaseDao {
 
@@ -61,4 +66,8 @@ public interface BaseDao {
      * @return java.util.List
     **/
     List getBeanList(Map map);
+
+    @Select("select * from dept t")
+    List<HashMap<String,Object>> getDept();
+
 }

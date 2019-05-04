@@ -8,6 +8,7 @@ import com.my.bean.Student;
 import com.my.bean.Teacher;
 import com.my.bean.check.CheckStudent;
 import com.my.common.GetClass;
+import com.my.dao.BaseDao;
 import com.my.exception.BizException;
 import com.my.jdk8.GroupBy;
 import com.my.service.BaseService;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,10 +49,15 @@ public class TestController {
     @Resource
     private GroupBy groupBy;
 
+    @Resource
+    private BaseDao baseDao;
+
     @GetMapping(value = "/get")
     public String get(){
 //        threadCallablePool.getT();
-        groupBy.testSum();
+//        groupBy.testSum();
+        List<HashMap<String, Object>> dept = baseDao.getDept();
+        logger.info("get --》{}",dept);
         return "hello word";
     }
 
