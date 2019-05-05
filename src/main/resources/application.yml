@@ -14,8 +14,8 @@
 #    # 使用c3p0数据源
 #    type: com.alibaba.druid.pool.DruidDataSource
 #    driver-class-name: oracle.jdbc.driver.OracleDriver
-##    url: jdbc:oracle:thin:@192.168.0.104:1521:orcl
-#    url: jdbc:oracle:thin:@127.0.0.1:1521:orcl
+#    url: jdbc:oracle:thin:@192.168.0.104:1521:orcl
+##    url: jdbc:oracle:thin:@127.0.0.1:1521:orcl
 #    username: scott
 #    password: 123456
 #    # 下面为连接池的补充设置，应用到上面所有数据源中

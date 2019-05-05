@@ -27,7 +27,7 @@ public class StudentEntity implements Serializable {
     @Excel(name = "进校日期", databaseFormat = "yyyyMMddHHmmss", format = "yyyy-MM-dd")
     private Date registrationDate;
 
-    @Excel(name = "钱财",type = 10 ,orderNum = "5", width = 20)
+    @Excel(name = "钱财",type = 10 ,orderNum = "5", width = 20, isStatistics = true)
     private Integer money;
 
     public StudentEntity() {

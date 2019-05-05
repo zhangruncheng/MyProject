@@ -10,9 +10,7 @@ import com.my.bean.excel.CourseEntity;
 import com.my.bean.excel.StudentEntity;
 import com.my.bean.excel.TeacherEntity;
 import com.my.service.excel.DateHandler;
-import com.my.service.excel.ExcelExportStylerColorNumImpl;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Sheet;
+import com.my.service.excel.ExcelExportStylerByTypeImpl;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,33 +36,33 @@ public class ExcelController {
             list.add(studentEntity);
         }
         ExportParams exportParams = new ExportParams("测试", "测试");
-        exportParams.setStyle(ExcelStyleType.COLOR.getClazz());
-        /** 设置数值处理器 */
-        DateHandler dateHandler = new DateHandler();
-        dateHandler.setNeedHandlerFields(new String[]{"钱财"});
-        exportParams.setDataHandler(dateHandler);
+        exportParams.setStyle(ExcelExportStylerByTypeImpl.class);
+//        /** 设置数值处理器 */
+//        DateHandler dateHandler = new DateHandler();
+//        dateHandler.setNeedHandlerFields(new String[]{"钱财"});
+//        exportParams.setDataHandler(dateHandler);
         /** 设置行高*/
         exportParams.setHeight((short) 8);
         Workbook workbook = ExcelExportUtil.exportExcel(exportParams, StudentEntity.class, list);
-
-        /** 重新设置单元格样式 */
-        CellStyle cellStyle = workbook.createCellStyle();
-        cellStyle.setDataFormat((short)37);
-        /** 使用重写的 excel 导出样式接口  IExcelExportStyler*/
-        ExcelExportStylerColorNumImpl excelExportStylerColorNum = new ExcelExportStylerColorNumImpl(workbook);
-        /** 各行换色 */
-        CellStyle cellStyle1 = excelExportStylerColorNum.stringSeptailStyle(workbook, true);
-        CellStyle cellStyle2 = excelExportStylerColorNum.stringSeptailStyle(workbook, false);
-
-        Sheet sheetAt = workbook.getSheetAt(0);
-        int physicalNumberOfRows = sheetAt.getPhysicalNumberOfRows();
-        for (int i = 2; i < physicalNumberOfRows; i++) {
-            if (i % 2 == 0) {
-                sheetAt.getRow(i).getCell(4).setCellStyle(cellStyle1);
-            } else {
-                sheetAt.getRow(i).getCell(4).setCellStyle(cellStyle2);
-            }
-        }
+//
+//        /** 重新设置单元格样式 */
+//        CellStyle cellStyle = workbook.createCellStyle();
+//        cellStyle.setDataFormat((short)37);
+//        /** 使用重写的 excel 导出样式接口  IExcelExportStyler*/
+//        ExcelExportStylerColorNumImpl excelExportStylerColorNum = new ExcelExportStylerColorNumImpl(workbook);
+//        /** 各行换色 */
+//        CellStyle cellStyle1 = excelExportStylerColorNum.stringSeptailStyle(workbook, true);
+//        CellStyle cellStyle2 = excelExportStylerColorNum.stringSeptailStyle(workbook, false);
+//
+//        Sheet sheetAt = workbook.getSheetAt(0);
+//        int physicalNumberOfRows = sheetAt.getPhysicalNumberOfRows();
+//        for (int i = 2; i < physicalNumberOfRows; i++) {
+//            if (i % 2 == 0) {
+//                sheetAt.getRow(i).getCell(4).setCellStyle(cellStyle1);
+//            } else {
+//                sheetAt.getRow(i).getCell(4).setCellStyle(cellStyle2);
+//            }
+//        }
 
         download(response,workbook);
     }
