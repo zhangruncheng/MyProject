@@ -6,6 +6,7 @@ import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelStyleType;
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import cn.afterturn.easypoi.excel.entity.params.ExcelExportEntity;
+import com.my.bean.excel.AddressEntity;
 import com.my.bean.excel.CourseEntity;
 import com.my.bean.excel.StudentEntity;
 import com.my.bean.excel.TeacherEntity;
@@ -73,6 +74,11 @@ public class ExcelController {
         List<StudentEntity> studentEntityList = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
             StudentEntity studentEntity = new StudentEntity(i+"", "张三" + i,  i%2,  new Date(), new Date(),((i+1)*(i+1)*(i+1))*1000);
+            studentEntity.setEntity1(new AddressEntity("1"));
+            studentEntity.setEntity2(new AddressEntity("1"));
+            studentEntity.setEntity3(new AddressEntity("1"));
+            studentEntity.setEntity4(new AddressEntity("1"));
+            studentEntity.setEntity5(new AddressEntity("1"));
             studentEntityList.add(studentEntity);
         }
 
@@ -88,6 +94,8 @@ public class ExcelController {
         courseEntity1.setMathTeacher(new TeacherEntity("梁启超"));
         courseEntity1.setStudents(studentEntityList);
         courseEntityList.add(courseEntity1);
+
+        courseEntity.setTeacher(new TeacherEntity("第一次"));
 
         Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams("三7班","课程，教师表"), CourseEntity.class, courseEntityList);
 

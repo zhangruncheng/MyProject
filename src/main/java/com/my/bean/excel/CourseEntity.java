@@ -21,6 +21,9 @@ public class CourseEntity implements Serializable {
     @ExcelEntity(id = "absent")
     private TeacherEntity mathTeacher;
 
+    @ExcelEntity(id = "major",name = "教师")
+    private TeacherEntity teacher;
+
     @ExcelCollection(name = "学生", orderNum = "4")
     private List<StudentEntity> students;
 }

@@ -1,6 +1,7 @@
 package com.my.bean.excel;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
+import cn.afterturn.easypoi.excel.annotation.ExcelEntity;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -29,6 +30,17 @@ public class StudentEntity implements Serializable {
 
     @Excel(name = "钱财",type = 10 ,orderNum = "5", width = 20, isStatistics = true)
     private Integer money;
+
+    @ExcelEntity(id = "first")
+    private AddressEntity entity1;
+    @ExcelEntity(id = "secend")
+    private AddressEntity entity2;
+    @ExcelEntity(id = "thread")
+    private AddressEntity entity3;
+    @ExcelEntity(id = "four")
+    private AddressEntity entity4;
+    @ExcelEntity(id = "five")
+    private AddressEntity entity5;
 
     public StudentEntity() {
     }
