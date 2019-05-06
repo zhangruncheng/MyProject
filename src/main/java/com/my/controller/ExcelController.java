@@ -74,11 +74,11 @@ public class ExcelController {
         List<StudentEntity> studentEntityList = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
             StudentEntity studentEntity = new StudentEntity(i+"", "张三" + i,  i%2,  new Date(), new Date(),((i+1)*(i+1)*(i+1))*1000);
-            studentEntity.setEntity1(new AddressEntity("1"));
-            studentEntity.setEntity2(new AddressEntity("1"));
-            studentEntity.setEntity3(new AddressEntity("1"));
-            studentEntity.setEntity4(new AddressEntity("1"));
-            studentEntity.setEntity5(new AddressEntity("1"));
+            studentEntity.setEntity1(new AddressEntity("1","011"));
+            studentEntity.setEntity2(new AddressEntity("2","012"));
+            studentEntity.setEntity3(new AddressEntity("3","013"));
+            studentEntity.setEntity4(new AddressEntity("4","014"));
+            studentEntity.setEntity5(new AddressEntity("5","015"));
             studentEntityList.add(studentEntity);
         }
 
