@@ -108,22 +108,37 @@ public class ExcelController {
 
         List<ExcelExportEntity> entity = new ArrayList<ExcelExportEntity>();
         //构造对象等同于@Excel
-        ExcelExportEntity excelentity = new ExcelExportEntity("姓名", "name");
-        excelentity.setNeedMerge(true);
-        entity.add(excelentity);
-        entity.add(new ExcelExportEntity("性别", "sex"));
-        excelentity = new ExcelExportEntity(null, "students");
-        List<ExcelExportEntity> temp = new ArrayList<ExcelExportEntity>();
-        temp.add(new ExcelExportEntity("姓名", "name"));
-        temp.add(new ExcelExportEntity("性别", "sex"));
+        ExcelExportEntity name = new ExcelExportEntity("姓名", "name");
+        name.setNeedMerge(true);
+        entity.add(name);
+        ExcelExportEntity sex = new ExcelExportEntity("性别", "sex");
+        sex.setReplace(new String[]{"男_0","女_1"});
+        sex.setSuffix("生");
+        entity.add(sex);
+        ExcelExportEntity age = new ExcelExportEntity("年龄", "age");
+        ExcelExportEntity age1 = new ExcelExportEntity("小学年龄", "age1");
+        age1.setType(10);
+        ExcelExportEntity age2 = new ExcelExportEntity("初中年龄", "age2");
+        age2.setType(10);
+        List<ExcelExportEntity> excelExportEntities = Arrays.asList(age1, age2);
+        age.setList(excelExportEntities);
+        entity.add(age);
+
         //构造List等同于@ExcelCollection
-        excelentity.setList(temp);
-        entity.add(excelentity);
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < 30; i++) {
             Map<String, Object> map = new HashMap<>();
             map.put("name","张三" + i);
             map.put("sex",i%2);
+            List<Map<String, Object>> ageList = new ArrayList<Map<String, Object>>();
+            Map<String, Object> mapS = new HashMap<>();
+            mapS.put("age1",12);
+            mapS.put("age2",15);
+            ageList.add(mapS);
+            ageList.add(mapS);
+            ageList.add(mapS);
+            map.put("age",ageList);
+
             list.add(map);
         }
 
