@@ -10,14 +10,15 @@ import com.my.bean.check.CheckStudent;
 import com.my.common.GetClass;
 import com.my.exception.BizException;
 import com.my.jdk8.GroupBy;
+import com.my.service.ArryService;
 import com.my.service.BaseService;
-import com.my.thread.ThreadCallablePool;
 import com.my.thread.ThreadTest;
 import com.my.util.ValidateUtil;
 import com.my.util.check.Privacy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,8 +35,8 @@ public class TestController {
 
     private static final Logger logger = LoggerFactory.getLogger(TestController.class);
 
-    @Autowired
-    private ThreadCallablePool threadCallablePool;
+    @Resource
+    private ThreadPoolTaskExecutor poolTaskExecutor;
 
 
     @Autowired
@@ -46,6 +47,9 @@ public class TestController {
 
     @Resource
     private GroupBy groupBy;
+
+    @Resource
+    private ArryService arryService;
 
 //    @Resource
 //    private BaseDao baseDao;
@@ -119,5 +123,27 @@ public class TestController {
             return value;
         }
     };
+
+    @GetMapping("twoArry")
+    public ResponseVO getTwoArryData(Integer rows){
+        ResponseVO vo = new ResponseVO();
+        String date = arryService.getDate(rows);
+        vo.setData(date);
+        return vo;
+    }
+
+
+    @GetMapping("twoArry/thread")
+    public ResponseVO getTwoArryData1(Integer rows){
+        ResponseVO vo = new ResponseVO();
+        logger.info("-start--");
+        for (int i = 1; i < rows; i++) {
+            int j = i;
+            poolTaskExecutor.execute(() -> arryService.getDate(j));
+        }
+        logger.info("-end--");
+        return vo;
+    }
+
 
 }

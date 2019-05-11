@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import java.util.concurrent.ThreadPoolExecutor;
+
 
 @Configuration
 public class ThreadPoolTaskConfig {
@@ -21,17 +23,16 @@ public class ThreadPoolTaskConfig {
         //设置核心线程数
         executor.setCorePoolSize(4);
         //设置最大线程数
-        executor.setMaxPoolSize(20);
+        executor.setMaxPoolSize(50);
         //除核心线程外的线程存活时间
-        executor.setKeepAliveSeconds(200);
+        executor.setKeepAliveSeconds(20000);
         //如果传入值大于0，底层队列使用的是LinkedBlockingQueue,否则默认使用SynchronousQueue
-        executor.setQueueCapacity(40);
+        executor.setQueueCapacity(10000);
         //线程名称前缀
         executor.setThreadNamePrefix("thread-execute");
         //设置拒绝策略
+        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
 
-
-        executor.setWaitForTasksToCompleteOnShutdown(true);
         return executor;
     }
 }
