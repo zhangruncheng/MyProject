@@ -27,6 +27,7 @@ public class TicketWindowsRunnable implements Runnable {
     public static void main(String[] args) {
 
 
+
         final TicketWindowsRunnable task = new TicketWindowsRunnable();
         Thread thread1 = new Thread(task, "一号窗口");
         Thread thread2 = new Thread(task, "二号窗口");
