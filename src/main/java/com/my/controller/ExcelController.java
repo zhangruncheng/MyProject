@@ -12,6 +12,7 @@ import com.my.bean.excel.StudentEntity;
 import com.my.bean.excel.TeacherEntity;
 import com.my.service.excel.DateHandler;
 import com.my.service.excel.ExcelExportStylerByTypeImpl;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +37,8 @@ public class ExcelController {
             StudentEntity studentEntity = new StudentEntity(i+"", "张三" + i,  i%2,  new Date(), new Date(),((i+1)*(i+1)*(i+1))*1000);
             list.add(studentEntity);
         }
-        ExportParams exportParams = new ExportParams("测试", "测试");
+        ExportParams exportParams = new ExportParams();
+        exportParams.setColor(HSSFColor.HSSFColorPredefined.LIGHT_ORANGE.getIndex());
         exportParams.setStyle(ExcelExportStylerByTypeImpl.class);
 //        /** 设置数值处理器 */
 //        DateHandler dateHandler = new DateHandler();

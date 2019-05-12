@@ -75,6 +75,7 @@ public class ExcelExportStylerByTypeImpl extends AbstractExcelExportStyleByType 
         font.setFontHeightInPoints((short) 24);
         titleStyle.setFont(font);
         titleStyle.setFillForegroundColor(headerColor);
+        titleStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         titleStyle.setAlignment(HorizontalAlignment.CENTER);
         titleStyle.setVerticalAlignment(VerticalAlignment.CENTER);
         return titleStyle;
@@ -93,9 +94,9 @@ public class ExcelExportStylerByTypeImpl extends AbstractExcelExportStyleByType 
         titleStyle.setBorderBottom(BorderStyle.THIN);
         titleStyle.setBorderTop(BorderStyle.THIN);
         titleStyle.setFillForegroundColor(color);
+        titleStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         titleStyle.setAlignment(HorizontalAlignment.CENTER);
         titleStyle.setVerticalAlignment(VerticalAlignment.CENTER);
-        titleStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         titleStyle.setWrapText(true);
         return titleStyle;
     }
