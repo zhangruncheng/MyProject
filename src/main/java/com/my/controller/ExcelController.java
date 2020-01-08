@@ -108,6 +108,12 @@ public class ExcelController {
     @PostMapping("/exportOther")
     public void exportOther(HttpServletResponse response){
 
+        List<List<Integer>> clist = new ArrayList();
+        for (int i = 0; i < 30; i++) {
+            clist.add(Arrays.asList(i,i+1,i+2,i+3,i+4,i+5));
+        }
+
+        final int sizeC = 6;
         List<ExcelExportEntity> entity = new ArrayList<ExcelExportEntity>();
         //构造对象等同于@Excel
         ExcelExportEntity name = new ExcelExportEntity("姓名", "name");
@@ -116,6 +122,7 @@ public class ExcelController {
         ExcelExportEntity sex = new ExcelExportEntity("性别", "sex");
         sex.setReplace(new String[]{"男_0","女_1"});
         sex.setSuffix("生");
+        sex.setNeedMerge(true);
         entity.add(sex);
         ExcelExportEntity age = new ExcelExportEntity("年龄", "age");
         ExcelExportEntity age1 = new ExcelExportEntity("小学年龄", "age1");
@@ -125,6 +132,13 @@ public class ExcelController {
         List<ExcelExportEntity> excelExportEntities = Arrays.asList(age1, age2);
         age.setList(excelExportEntities);
         entity.add(age);
+        ExcelExportEntity count = new ExcelExportEntity("次数", "count");
+        List<ExcelExportEntity> coeif = new ArrayList<>();
+        for (int i = 0; i < sizeC; i++) {
+            coeif.add(new ExcelExportEntity("次数" + ( i + 1 ), "count" +i));
+        }
+        count.setList(coeif);
+        entity.add(count);
 
         //构造List等同于@ExcelCollection
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
@@ -141,6 +155,14 @@ public class ExcelController {
             ageList.add(mapS);
             map.put("age",ageList);
 
+            List<Integer> integers = clist.get(i);
+            List<Map<String, Object>> icount = new ArrayList<Map<String, Object>>();
+            Map<String, Object> imap = new HashMap<>();
+            for (int j = 0; j < sizeC; j++) {
+                imap.put("count" +j,integers.get(j));
+            }
+            icount.add(imap);
+            map.put("count",icount);
             list.add(map);
         }
 

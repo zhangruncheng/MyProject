@@ -1,22 +1,20 @@
 package cn.afterturn.easypoi.test.excel.export;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
+import cn.afterturn.easypoi.test.entity.CourseEntity;
+import cn.afterturn.easypoi.test.entity.StudentEntity;
+import cn.afterturn.easypoi.test.entity.TeacherEntity;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import org.apache.poi.ss.usermodel.Workbook;
-
-import cn.afterturn.easypoi.test.entity.CourseEntity;
-import cn.afterturn.easypoi.test.entity.StudentEntity;
-import cn.afterturn.easypoi.test.entity.TeacherEntity;
-import cn.afterturn.easypoi.excel.ExcelExportUtil;
-import cn.afterturn.easypoi.excel.entity.ExportParams;
-import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
-
-import org.junit.Before;
-import org.junit.Test;
 
 /**
  * Created by jue on 14-4-19.
@@ -42,7 +40,7 @@ public class ExcelExportUtilTest {
         if (!savefile.exists()) {
             savefile.mkdirs();
         }
-        FileOutputStream fos = new FileOutputStream("D:/excel/oneHundredThousandRowTest.xlsx");
+        FileOutputStream fos = new FileOutputStream("/Users/zhangruncheng/Desktop/测试excel/oneHundredThousandRowTest.xlsx");
         workbook.write(fos);
         fos.close();
         //        savefile = new File("D:/excel/1");
@@ -101,7 +99,12 @@ public class ExcelExportUtilTest {
         if (!savefile.exists()) {
             savefile.mkdirs();
         }
-        FileOutputStream fos = new FileOutputStream("D:/excel/testStudentList.xls");
+        FileOutputStream fos = null;
+        if (System.getProperty("os.name").contains("Mac")) {
+            fos = new FileOutputStream("/Users/zhangruncheng/Desktop/测试excel/testStudentList.xls");
+        }else {
+            fos = new FileOutputStream("D:/excel/testStudentList.xls");
+        }
         workbook.write(fos);
         fos.close();
     }

@@ -56,7 +56,7 @@ public class GroupBy {
 //        companyEntiryList.add(new CompanyEntiry("PA004", null));
 //        companyEntiryList.add(new CompanyEntiry("PA005", null));
 //        companyEntiryList.add(new CompanyEntiry("PA004", null));
-//        companyEntiryList.add(new CompanyEntiry("PA005", null));
+//        companyEntiryList.add(new CompanyEntiry("PA005", null));log
 //        companyEntiryList.add(new CompanyEntiry("PA005", null));
 
         /** 分组统计 */

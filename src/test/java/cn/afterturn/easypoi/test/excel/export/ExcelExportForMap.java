@@ -1,5 +1,12 @@
 package cn.afterturn.easypoi.test.excel.export;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
+import cn.afterturn.easypoi.excel.entity.params.ExcelExportEntity;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.junit.Test;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,13 +16,6 @@ import java.util.List;
 import java.util.Map;
 
 //import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.junit.Test;
-
-import cn.afterturn.easypoi.excel.ExcelExportUtil;
-import cn.afterturn.easypoi.excel.entity.ExportParams;
-import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
-import cn.afterturn.easypoi.excel.entity.params.ExcelExportEntity;
 
 public class ExcelExportForMap {
     /**
@@ -31,7 +31,7 @@ public class ExcelExportForMap {
             entity.add(new ExcelExportEntity("性别", "sex"));
             excelentity = new ExcelExportEntity(null, "students");
             List<ExcelExportEntity> temp = new ArrayList<ExcelExportEntity>();
-            temp.add(new ExcelExportEntity("姓名", "name"));
+            temp.add(new ExcelExportEntity("", "name"));
             temp.add(new ExcelExportEntity("性别", "sex"));
             excelentity.setList(temp);
             entity.add(excelentity);
@@ -53,7 +53,12 @@ public class ExcelExportForMap {
 
             Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams("测试", "测试"), entity,
                 list);
-            FileOutputStream fos = new FileOutputStream("D:/excel/ExcelExportForMap.tt.xls");
+            FileOutputStream fos = null;
+            if (System.getProperty("os.name").contains("Mac")) {
+                fos = new FileOutputStream("/Users/zhangruncheng/Desktop/测试excel/ExcelExportForMap.tt.xls");
+            }else {
+                fos = new FileOutputStream("D:/excel/ExcelExportForMap.tt.xls");
+            }
             workbook.write(fos);
             fos.close();
         } catch (FileNotFoundException e) {

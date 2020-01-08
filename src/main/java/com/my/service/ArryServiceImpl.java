@@ -3,6 +3,7 @@ package com.my.service;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
@@ -33,6 +34,7 @@ public class ArryServiceImpl implements ArryService {
         threadLocal.set(excel);
     }
 
+    @Transactional
     @Override
     public String getDate(Integer rows) {
         setArry(rows);

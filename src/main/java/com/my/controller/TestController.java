@@ -8,6 +8,7 @@ import com.my.bean.Student;
 import com.my.bean.Teacher;
 import com.my.bean.check.CheckStudent;
 import com.my.common.GetClass;
+import com.my.dao.BaseDao;
 import com.my.exception.BizException;
 import com.my.jdk8.GroupBy;
 import com.my.service.ArryService;
@@ -51,13 +52,13 @@ public class TestController {
     @Resource
     private ArryService arryService;
 
-//    @Resource
-//    private BaseDao baseDao;
+    @Resource
+    private BaseDao baseDao;
 
     @GetMapping(value = "/get")
     public String get(){
 //        threadCallablePool.getT();
-//        groupBy.testSum();
+        groupBy.testSum();
 //        List<HashMap<String, Object>> dept = baseDao.getDept();
 //        logger.info("get --》{}",dept);
         return "hello word";

@@ -18,8 +18,8 @@ public class ThreadPoolTaskConfig {
 
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         //此方法返回可用处理器的虚拟机的最大数量; 不小于1
-        int core = Runtime.getRuntime().availableProcessors();
-        logger.info("核心 = " +core);
+//        int core = Runtime.getRuntime().availableProcessors();
+//        logger.info("核心 = " +core);
         //设置核心线程数
         executor.setCorePoolSize(4);
         //设置最大线程数
