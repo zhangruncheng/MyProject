@@ -1,12 +1,5 @@
 package com.my.thread.book;
 
-
-import com.my.bean.Student;
-
-import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @Author : zhangruncheng
  * @Date : 2019-04-21  14:31
@@ -22,17 +15,6 @@ public class TicketWindowsRunnable implements Runnable {
 
     private final static Object mutes = new Object();
 
-    /**
-     * When an object implementing interface <code>Runnable</code> is used
-     * to create a thread, starting the thread causes the object's
-     * <code>run</code> method to be called in that separately executing
-     * thread.
-     * <p>
-     * The general contract of the method <code>run</code> is that it may
-     * take any action whatsoever.
-     *
-     * @see Thread#run()
-     */
     @Override
     public void run() {
         synchronized (mutes) {
@@ -43,6 +25,7 @@ public class TicketWindowsRunnable implements Runnable {
     }
 
     public static void main(String[] args) {
+
 
 
         final TicketWindowsRunnable task = new TicketWindowsRunnable();

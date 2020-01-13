@@ -40,6 +40,7 @@ public class ArryServiceImpl implements ArryService {
         setArry(rows);
         double[][] doubles = (double[][]) threadLocal.get();
         log.info("getDate--> get this two arry rows = [{}], jsonStr = [{}]",rows,doubles.length);
+        log.error("get this two arry rows = [{}], jsonStr = [{}]",rows,"error");
         if (rows != doubles.length) {
             log.error("getDate--> error [{}]",rows);
         }
